@@ -24,7 +24,6 @@ public class FieldClickHandler : MonoBehaviour
 	}
 
 	void OnMouseDown() {
-		MeshRenderer renderer = gameObject.GetComponent<MeshRenderer>();
 		Debug.Log("mouse down");
 	}
 
