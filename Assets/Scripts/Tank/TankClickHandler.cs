@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class TankClickHandler : MonoBehaviour {
 
+	// Use this for initialization
+	void Start() {
+		Debug.Log("start " + gameObject.name);
+	}
+
+	// Update is called once per frame
+	void Update() {
+
+	}
+
 	void OnMouseDown() {
-		Destroy(gameObject);
+		Debug.Log("mouse down " + gameObject.name);
+		//Destroy(gameObject);
 		// TODO usefull later
 		if (Input.GetMouseButtonDown(0)) {
 			// Whatever you want it to do.
@@ -14,7 +25,7 @@ public class TankClickHandler : MonoBehaviour {
 
 
 	void OnMouseOver() {
-		Debug.Log(gameObject.name);
+		Debug.Log("mouse over " + gameObject.name);
 	}
 
 }
