@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platoon", "Platoon.csproj", "{6AED140D-F578-1EC7-1112-C5010B20D769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platoon.Editor", "Platoon.Editor.csproj", "{469ACDA9-EA48-51BD-7FC5-08FA43153492}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{6AED140D-F578-1EC7-1112-C5010B20D769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AED140D-F578-1EC7-1112-C5010B20D769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AED140D-F578-1EC7-1112-C5010B20D769}.Release|Any CPU.Build.0 = Release|Any CPU
-		{469ACDA9-EA48-51BD-7FC5-08FA43153492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{469ACDA9-EA48-51BD-7FC5-08FA43153492}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{469ACDA9-EA48-51BD-7FC5-08FA43153492}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{469ACDA9-EA48-51BD-7FC5-08FA43153492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
