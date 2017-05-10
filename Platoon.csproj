@@ -80,12 +80,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Scripts\FieldClickHandler.cs" />
     <Compile Include="Assets\Scripts\Pause.cs" />
     <Compile Include="Assets\Scripts\PlayMusic.cs" />
     <Compile Include="Assets\Scripts\QuitApplication.cs" />
     <Compile Include="Assets\Scripts\SetAudioLevels.cs" />
     <Compile Include="Assets\Scripts\ShowPanels.cs" />
     <Compile Include="Assets\Scripts\StartOptions.cs" />
+    <Compile Include="Assets\Scripts\TankClickHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\OpenSans\License!.txt" />
