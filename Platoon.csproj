@@ -81,7 +81,13 @@
     <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
     <Compile Include="Assets\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\EventSystemChecker.cs" />
-    <Compile Include="Assets\Scripts\FieldClickHandler.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\Battlefield.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\BattlefieldModel.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\BattlefieldView.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\Field.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\FieldClickHandler.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\PrefabFactory.cs" />
+    <Compile Include="Assets\Scripts\Level\Battlefield\TilePosition.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\TankManager.cs" />
     <Compile Include="Assets\Scripts\Pause.cs" />
