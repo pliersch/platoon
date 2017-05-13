@@ -22,17 +22,17 @@ namespace Level.Battlefield {
 			get { return _fields; }
 		}
 
-		void Awake() {
+		private void Awake() {
 			// only for debug
 			ComputeAndCheckFieldSize();
 		}
 
 		// Use this for initialization
-		void Start() {
+		private void Start() {
 		}
 
 		// Update is called once per frame
-		void Update() {
+		private void Update() {
 		}
 
 		// TODO generate ground in Maya with pivot on 0,0 and not in center to avoid computing offset
@@ -67,11 +67,7 @@ namespace Level.Battlefield {
 		public void AddUnit(GameObject unit, int XPos, int zPos) {
 			Field field = _fields[XPos, zPos];
 			Vector3 position = new Vector3(field.GetRealPosition().x, 0, field.GetRealPosition().y);
-//			Debug.Log(field.GetRealPosition().x);
-//			Debug.Log(field.GetRealPosition().y);
 			GameObject go = Instantiate(unit, position, unit.transform.rotation);
-			Debug.Log(go.transform.position.x);
-			Debug.Log(go.transform.position.z);
 			//			float x = field.
 			//			Instantiate(tank, new Vector3(), tank.transform.rotation);
 		}
