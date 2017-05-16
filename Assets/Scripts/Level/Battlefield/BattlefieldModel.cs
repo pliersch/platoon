@@ -5,6 +5,7 @@ namespace level.battlefield {
 
 	public class BattlefieldModel : MonoBehaviour {
 
+		private Pathfinder _pathfinder;
 		private Field[,] _fields;
 
 		// TODO do we need param unit?
@@ -39,15 +40,14 @@ namespace level.battlefield {
 					_fields[x, y] = field;
 				}
 			}
+			// is not nice because hard to find, but performant
+			// is there a better solution?
+			_pathfinder = new Pathfinder(_fields);
 			return _fields;
 		}
 
 		public Field[] GetReachableFields(Position position) {
-			Position[] positions = Pathfinder.getReachableFields(position.x, position.z);
-			Field[] fields = new Field[positions.Length];
-			for (int i = 0; i < positions.Length; i++) {
-				fields[i] = GetField(positions[i]);
-			}
+			Field[] fields = _pathfinder.GetReachableFields(position, 5);
 			return fields;
 		}
 
