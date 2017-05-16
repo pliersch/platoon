@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -80,17 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Cameras\CameraControl.cs" />
-    <Compile Include="Assets\Scripts\Cameras\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\EventSystemChecker.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\Battlefield.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\BattlefieldModel.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\BattlefieldView.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\Field.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\FieldClickHandler.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\PrefabFactory.cs" />
-    <Compile Include="Assets\Scripts\Level\Battlefield\TilePosition.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\TankManager.cs" />
     <Compile Include="Assets\Scripts\Pause.cs" />
@@ -100,11 +89,25 @@
     <Compile Include="Assets\Scripts\Shell\ShellExplosion.cs" />
     <Compile Include="Assets\Scripts\ShowPanels.cs" />
     <Compile Include="Assets\Scripts\StartOptions.cs" />
-    <Compile Include="Assets\Scripts\Tank\TankActionHandler.cs" />
-    <Compile Include="Assets\Scripts\Tank\TankHealth.cs" />
-    <Compile Include="Assets\Scripts\Tank\TankMovement.cs" />
-    <Compile Include="Assets\Scripts\Tank\TankShooting.cs" />
+    <Compile Include="Assets\Scripts\Tanks\TankActionHandler.cs" />
+    <Compile Include="Assets\Scripts\Tanks\TankHealth.cs" />
+    <Compile Include="Assets\Scripts\Tanks\TankMovement.cs" />
+    <Compile Include="Assets\Scripts\Tanks\TankShooting.cs" />
     <Compile Include="Assets\Scripts\UI\UIDirectionControl.cs" />
+    <Compile Include="Assets\Scripts\cameras\CameraControl.cs" />
+    <Compile Include="Assets\Scripts\cameras\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Battlefield.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\BattlefieldModel.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\BattlefieldView.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Field.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Position.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\PrefabFactory.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Tile.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\Util\LevelChecker.cs" />
+    <Compile Include="Assets\Scripts\level\gameObjects\Army.cs" />
+    <Compile Include="Assets\Scripts\level\gameObjects\Tank.cs" />
+    <Compile Include="Assets\Scripts\level\gameObjects\Unit.cs" />
     <Compile Include="Assets\_Completed-Assets\Scripts\Camera\CameraControl.cs" />
     <Compile Include="Assets\_Completed-Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\_Completed-Assets\Scripts\Managers\TankManager.cs" />
@@ -118,6 +121,8 @@
   <ItemGroup>
     <None Include="Assets\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\GameJamTemplateReadMe.txt" />
+    <None Include="Assets\Ideas.txt" />
+    <None Include="Assets\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

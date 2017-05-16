@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Level.Battlefield {
+namespace level.battlefield {
 
 	public class PrefabFactory : MonoBehaviour {
 
 		public GameObject tank;
-
-		void Awake() {
-			
-		}
+		public GameObject tile;
 
 	}
 

@@ -1,0 +1,2 @@
+- Werkstatt fürs HQ
+	- Items sammeln (begrenzter Platz, aber durch Upgrades erweiterbar) und in Werkstratt zusammenbauen

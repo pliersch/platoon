@@ -1,21 +1,26 @@
-﻿using Cameras;
+﻿using cameras;
+using level.gameObjects;
 using UnityEngine;
 
-namespace Tank {
+namespace Tanks {
 
 	public class TankActionHandler : MonoBehaviour {
 
 		private CameraFollow _cameraFollow;
+		private Unit _handler;
 
-		// Use this for initialization
 		private void Start() {
 			var camerRig = GameObject.FindWithTag("MainCamera");
 			_cameraFollow = camerRig.GetComponent<CameraFollow>();
 		}
 
+		public void SetInteractionHandler(Unit handler) {
+			_handler = handler;
+		}
+
 		private void OnMouseDown() {
 			_cameraFollow.AddTarget(gameObject.transform);
-			//Destroy(gameObject);
+			_handler.HandleClick();
 		}
 
 		private void OnMouseOver() {
