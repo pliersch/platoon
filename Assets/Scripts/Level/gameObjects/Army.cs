@@ -6,7 +6,7 @@ namespace level.gameObjects {
 
 		public Unit[] _units;
 		private Unit _activeUnit;
-		private Battlefield _battlefield;
+		private readonly Battlefield _battlefield;
 
 		public Army(Battlefield battlefield, Unit[] units) {
 			_battlefield = battlefield;

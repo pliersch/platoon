@@ -14,17 +14,14 @@ namespace level.battlefield {
 
 		private void Start() {
 			float tileSize = new LevelChecker().CheckTileSize(_factory.tile);
-			Transform pivot = transform.Find("GroundPlane/Pivot");
-			_model.GenerateFields(_rows, _columns, tileSize, pivot.position);
-			var position = new Position(3, 3);
-			GameObject go = AddUnits(_factory.tank, position);
-			Unit[] units = new Unit[1];
-			Unit unit = new Tank(go, position);
-			units[0] = unit;
-			Army army = new Army(this, units);
-			unit.SetArmy(army);
+			_model.GenerateFields(_rows, _columns, tileSize, transform.position);
+			Position[] positions = new[] {
+				new Position(3, 3),
+				new Position(3, 4),
+				new Position(4, 3)
+			};
+			AddUnits(positions);
 
-			_model.UpdateAddedUnit(unit, position);
 		}
 
 //		private void Update() {
@@ -32,9 +29,18 @@ namespace level.battlefield {
 
 
 
-		private GameObject AddUnits(GameObject go, Position position) {
-			Field field = _model.GetField(position);
-			return _view.AddUnit(go, field.RealPosition);
+		private void AddUnits(Position[] positions) {
+			for (int i = 0; i < positions.Length; i++) {
+				var position = positions[i];
+				Field field = _model.GetField(position);
+				GameObject go = _view.AddUnit(_factory.tank, field.RealPosition);
+				Unit[] units = new Unit[positions.Length];
+				Unit unit = new Tank(go, position);
+				units[i] = unit;
+				Army army = new Army(this, units);
+				unit.SetArmy(army);
+				_model.UpdateAddedUnit(unit, position);
+			}
 		}
 
 		public void HandleUnitSelected(Unit unit) {
