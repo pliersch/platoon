@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Cameras {
+namespace cameras {
 
 	public class CameraFollow : MonoBehaviour {
 
@@ -9,7 +9,7 @@ namespace Cameras {
 		public Transform _target; // The position that that camera will be following.
 
 		public float _smoothing = 5f; // The speed with which the camera will be following.
-		private Vector3 _offset; // The initial offset from the target.
+//		private Vector3 _offset; // The initial offset from the target.
 		private bool _isZooming;
 		private readonly float _zoomFactor = 5f;
 		private float _zoom;
@@ -27,7 +27,7 @@ namespace Cameras {
 			_camera = Camera.main;
 			_isZooming = false;
 			// Calculate the initial offset.
-			_offset = transform.position - _target.position;
+//			_offset = transform.position - _target.position;
 		}
 
 		private void Update() {
@@ -61,7 +61,6 @@ namespace Cameras {
 			}
 			if (_isZooming) {
 				_camera.orthographicSize += _zoom;
-				Debug.Log("y: " + transform.position.y);
 			}
 		}
 
