@@ -9,15 +9,25 @@ namespace level.battlefield {
 		public int RemainedActionPoint { get; set; }
 		public Color _colorOver;
 		public Color _colorOut;
+		private MeshRenderer _meshRenderer;
+		private bool _isOver;
+
+		private void Start() {
+			_meshRenderer = gameObject.GetComponent<MeshRenderer>();
+			_meshRenderer.material.color = _colorOut;
+			_isOver = false;
+		}
 
 		public void SetText(string msg) {
-			TextMesh textMesh = GetComponentInChildren<TextMesh>();
-			textMesh.text = msg;
+			//GetComponentInChildren<TextMesh>().text = msg;
 		}
 
 		private void OnMouseOver() {
-			var r = gameObject.GetComponent<MeshRenderer>();
-			r.material.color = _colorOver;
+			if (_isOver) {
+				return;
+			}
+			_isOver = true;
+			_meshRenderer.material.color = _colorOver;
 		}
 
 		private void OnMouseDown() {
@@ -25,8 +35,8 @@ namespace level.battlefield {
 		}
 
 		private void OnMouseExit() {
-			var r = gameObject.GetComponent<MeshRenderer>();
-			r.material.color = _colorOut;
+			_isOver = false;
+			_meshRenderer.material.color = _colorOut;
 		}
 
 	}
