@@ -12,6 +12,7 @@ namespace level.battlefield {
 		public int _rows;
 		public int _columns;
 
+		// TODO: move LevelChecker and all of generation/initializing to a factory. Don´t want see here
 		private void Start() {
 			float tileSize = new LevelChecker().CheckTileSize(_factory.tile);
 			_model.GenerateFields(_rows, _columns, tileSize, transform.position);
@@ -42,6 +43,10 @@ namespace level.battlefield {
 				unit.SetArmy(army);
 				_model.UpdateAddedUnit(unit, position);
 			}
+		}
+
+		public void OnCamera() {
+			Debug.Log(" foo");
 		}
 
 	}

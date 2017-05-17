@@ -7,11 +7,11 @@ namespace level.battlefield {
 
 		private Pathfinder _pathfinder;
 		private Field[,] _fields;
-		private Vector3 _pivot;
+//		private Vector3 _pivot;
 		private float _tileSize;
 		private float _tileCenter;
-		private int _rows;
-		private int _columns;
+//		private int _rows;
+//		private int _columns;
 
 		// TODO do we need param unit?
 		public void UpdateAddedUnit(Unit unit, Position position) {
@@ -24,9 +24,9 @@ namespace level.battlefield {
 		}
 
 		public Field[,] GenerateFields(int rows, int columns, float tileSize, Vector3 pivot) {
-			_rows = rows;
-			_columns = columns;
-			_pivot = pivot;
+//			_rows = rows;
+//			_columns = columns;
+//			_pivot = pivot;
 			_tileSize = tileSize;
 			float halfSize = _tileSize / 2;
 			_tileCenter = pivot.x + halfSize;
@@ -56,24 +56,19 @@ namespace level.battlefield {
 		}
 
 		public Position ConvertCoordinateToPosition(Vector3 coordinate) {
-			Debug.Log(" local x : " + coordinate.x);
-			Debug.Log(" local z : " + coordinate.z);
-			Debug.Log(" local x center : " + (coordinate.x - _tileCenter));
-			Debug.Log(" local z center : " + (coordinate.z - _tileCenter));
-
 			int x = (int) ((coordinate.x - _tileSize / 2) / _tileSize);
 			int z = (int) ((coordinate.z - _tileSize / 2) / _tileSize);
 			return new Position(x, z);
 
 		}
 
-		public Vector3 ConvertPositionToCoordinate(int x, int z) {
-			float center = _tileSize / 2;
-			float xPos = x * _tileSize + center;
-			float zPos = z * _tileSize + center;
-			return new Vector3(xPos, 0, zPos);
-
-		}
+//		public Vector3 ConvertPositionToCoordinate(int x, int z) {
+//			float center = _tileSize / 2;
+//			float xPos = x * _tileSize + center;
+//			float zPos = z * _tileSize + center;
+//			return new Vector3(xPos, 0, zPos);
+//
+//		}
 
 //		private Position ConvertPositionToCoordinate(Position position) {
 //
