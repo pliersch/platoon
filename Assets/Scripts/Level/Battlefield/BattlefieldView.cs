@@ -24,6 +24,9 @@ namespace level.battlefield {
 		}
 
 		internal void ShowReachableFields(Field[] reachableFields) {
+			foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Field")) {
+				Destroy(tile);
+			}
 			foreach (var field in reachableFields) {
 				GameObject go =
 					Instantiate(_fieldPrefab, field.RealPosition, _fieldPrefab.transform.rotation);

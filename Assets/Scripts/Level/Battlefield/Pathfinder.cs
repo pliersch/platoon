@@ -5,11 +5,11 @@ namespace level.battlefield {
 
 	public class Pathfinder {
 
-		private Field[,] _fields;
+		private readonly Field[,] _fields;
 		private List<Field> _openFields;
 		private List<Field> _closedFields;
-		private int _rows;
-		private int _columns;
+		private readonly int _rows;
+		private readonly int _columns;
 
 		public Pathfinder(Field[,] fields) {
 			_fields = fields;
@@ -18,17 +18,15 @@ namespace level.battlefield {
 		}
 
 		public Field[] GetReachableFields(Position position, int actionPoints) {
-			List<Field> reachableNeighbours;
 			_openFields = new List<Field>();
 			_closedFields = new List<Field>();
 			Field chckField;
-			Field currentField;
 
-			currentField = _fields[position.x, position.z];
+			var currentField = _fields[position.x, position.z];
 			currentField.RemainedActionPoint = actionPoints;
 			_closedFields.Add(currentField);
 
-			reachableNeighbours = getReachableNeighbours(currentField, actionPoints);
+			var reachableNeighbours = GetReachableNeighbours(currentField, actionPoints);
 			if (reachableNeighbours.Count > 0) {
 				for (int i = 0; i < reachableNeighbours.Count; i++) {
 					chckField = reachableNeighbours[i];
@@ -38,15 +36,13 @@ namespace level.battlefield {
 				}
 			}
 			while (_openFields.Count > 0) {
-				//currentField = _openFields.pop();
-				// TODO is the same like pop?
 				currentField = _openFields[_openFields.Count - 1];
 				_openFields.RemoveAt(_openFields.Count - 1);
 
-				reachableNeighbours = getReachableNeighbours(currentField, currentField.RemainedActionPoint);
+				reachableNeighbours = GetReachableNeighbours(currentField, currentField.RemainedActionPoint);
 				for (int j = 0; j < reachableNeighbours.Count; j++) {
 					chckField = reachableNeighbours[j];
-					if (isNewField(chckField)) {
+					if (IsNewField(chckField)) {
 						_openFields.Add(chckField);
 						chckField.Parent = currentField;
 						chckField.RemainedActionPoint = currentField.RemainedActionPoint - chckField.WayCost;
@@ -54,11 +50,9 @@ namespace level.battlefield {
 						if (currentField.RemainedActionPoint - chckField.WayCost > chckField.RemainedActionPoint) {
 							chckField.RemainedActionPoint = currentField.RemainedActionPoint - chckField.WayCost;
 							chckField.Parent = currentField;
-							if (isInClosedList(chckField)) {
+							if (IsInClosedList(chckField)) {
 								int index = _closedFields.IndexOf(chckField);
 								_openFields.Add(_closedFields[index]);
-								//_closedFields.splice(index, 1);
-								// TODO is the same like splice?
 								_closedFields.RemoveAt(index);
 							}
 						}
@@ -69,19 +63,19 @@ namespace level.battlefield {
 			return _closedFields.ToArray();
 		}
 
-		private bool isInOpenList(Field field) {
+		private bool IsInOpenList(Field field) {
 			return _openFields.Contains(field);
 		}
 
-		private bool isInClosedList(Field field) {
+		private bool IsInClosedList(Field field) {
 			return _closedFields.Contains(field);
 		}
 
-		private bool isNewField(Field field) {
-			return !isInOpenList(field) && !isInClosedList(field);
+		private bool IsNewField(Field field) {
+			return !IsInOpenList(field) && !IsInClosedList(field);
 		}
 
-		private List<Field> getReachableNeighbours(Field field, int remainingActionPoints) {
+		private List<Field> GetReachableNeighbours(Field field, int remainingActionPoints) {
 			Position[] neighboursPoints = GetNeighbourPositions(field.Position);
 			List<Field> neighboursFields = new List<Field>();
 
