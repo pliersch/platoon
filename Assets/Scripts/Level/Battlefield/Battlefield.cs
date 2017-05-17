@@ -31,15 +31,15 @@ namespace level.battlefield {
 		private void AddUnits() {
 			var respawns = GameObject.FindGameObjectsWithTag("Respawn");
 			Position[] positions = new Position[respawns.Length];
+			Unit[] units = new Unit[positions.Length];
+			Army army = new Army(this, units);
 			for (int i = 0; i < respawns.Length; i++) {
 				positions[i] = _model.ConvertCoordinateToPosition(respawns[i].transform.localPosition);
 				var position = positions[i];
 				Field field = _model.GetField(position);
 				GameObject go = _view.AddUnit(_factory.tank, field.RealPosition);
-				Unit[] units = new Unit[positions.Length];
 				Unit unit = new Tank(go, position);
 				units[i] = unit;
-				Army army = new Army(this, units);
 				unit.SetArmy(army);
 				_model.UpdateAddedUnit(unit, position);
 			}
