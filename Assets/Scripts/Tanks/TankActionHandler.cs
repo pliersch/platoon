@@ -18,7 +18,7 @@ namespace Tanks {
 			_handler = handler;
 		}
 
-		private void OnMouseDown() {
+		private void OnMouseUp() {
 			_cameraFollow.AddTarget(gameObject.transform);
 			_handler.HandleClick();
 		}
