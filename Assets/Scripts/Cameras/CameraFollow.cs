@@ -65,10 +65,9 @@ namespace cameras {
 		}
 
 		// return the position of the mouse in world coordinates (helper method)
-		Vector3 MousePos() {
+		private Vector3 MousePos() {
 			return Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
-
 	}
 
 }
