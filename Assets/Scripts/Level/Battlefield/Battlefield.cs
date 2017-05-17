@@ -15,22 +15,23 @@ namespace level.battlefield {
 		private void Start() {
 			float tileSize = new LevelChecker().CheckTileSize(_factory.tile);
 			_model.GenerateFields(_rows, _columns, tileSize, transform.position);
-			Position[] positions = new[] {
-				new Position(3, 3),
-				new Position(3, 4),
-				new Position(4, 3)
-			};
-			AddUnits(positions);
-
+			AddUnits();
 		}
 
-//		private void Update() {
-//		}
+		//		private void Update() {
+		//		}
+
+		public void HandleUnitSelected(Unit unit) {
+			Field[] reachableFields = _model.GetReachableFields(unit.Position);
+			_view.ShowReachableFields(reachableFields);
+		}
 
 
-
-		private void AddUnits(Position[] positions) {
-			for (int i = 0; i < positions.Length; i++) {
+		private void AddUnits() {
+			var respawns = GameObject.FindGameObjectsWithTag("Respawn");
+			Position[] positions = new Position[respawns.Length];
+			for (int i = 0; i < respawns.Length; i++) {
+				positions[i] = _model.ConvertCoordinateToPosition(respawns[i].transform.localPosition);
 				var position = positions[i];
 				Field field = _model.GetField(position);
 				GameObject go = _view.AddUnit(_factory.tank, field.RealPosition);
@@ -41,11 +42,6 @@ namespace level.battlefield {
 				unit.SetArmy(army);
 				_model.UpdateAddedUnit(unit, position);
 			}
-		}
-
-		public void HandleUnitSelected(Unit unit) {
-			Field[] reachableFields = _model.GetReachableFields(unit.Position);
-			_view.ShowReachableFields(reachableFields);
 		}
 
 	}
