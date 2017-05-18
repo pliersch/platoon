@@ -1,4 +1,5 @@
-﻿using level.gameObjects;
+﻿using System.Collections.Generic;
+using level.gameObjects;
 using UnityEngine;
 
 namespace level.battlefield {
@@ -6,9 +7,12 @@ namespace level.battlefield {
 	public class BattlefieldModel : MonoBehaviour {
 
 		private Pathfinder _pathfinder;
+
 		private Field[,] _fields;
+
 //		private Vector3 _pivot;
 		private float _tileSize;
+
 		private float _tileCenter;
 //		private int _rows;
 //		private int _columns;
@@ -59,8 +63,8 @@ namespace level.battlefield {
 			int x = (int) ((coordinate.x - _tileSize / 2) / _tileSize);
 			int z = (int) ((coordinate.z - _tileSize / 2) / _tileSize);
 			return new Position(x, z);
-
 		}
+
 
 //		public Vector3 ConvertPositionToCoordinate(int x, int z) {
 //			float center = _tileSize / 2;
@@ -73,6 +77,19 @@ namespace level.battlefield {
 //		private Position ConvertPositionToCoordinate(Position position) {
 //
 //		}
+		public Field[] GetWay(Position targetPosition) {
+			List<Field> endToStart = new List<Field> {};
+			Field current = GetField(targetPosition);
+			endToStart.Add(current);
+			Field parent = current.Parent;
+			while (parent != null) {
+				endToStart.Add(parent);
+				parent = parent.Parent;
+			}
+			endToStart.Reverse();
+			return endToStart.ToArray();
+		}
+
 	}
 
 }

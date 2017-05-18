@@ -3,20 +3,11 @@ using UnityEngine;
 
 namespace level.battlefield {
 
-	public class BattlefieldView : MonoBehaviour {
+	public class BattlefieldView : MonoBehaviour, ITileActionHandler {
 
 		public GameObject _fieldPrefab;
 		public GameObject _pivot;
-
-
-		private void Awake() {
-		}
-
-		private void Start() {
-		}
-
-		private void Update() {
-		}
+		private IBattlefieldViewController _controller;
 
 		public GameObject AddUnit(GameObject unit, Vector3 position) {
 			return Instantiate(unit, position, unit.transform.rotation);
@@ -31,8 +22,18 @@ namespace level.battlefield {
 				GameObject go =
 					Instantiate(_fieldPrefab, field.RealPosition, _fieldPrefab.transform.rotation);
 				Tile tile = (Tile) go.GetComponent(typeof(Tile));
+				tile.SetActionHandler(this);
+				tile.SetPosition(field.Position);
 				tile.SetText(field.Position.x + " | "+ field.Position.z);
 			}
+		}
+
+		public void HandleRechableFieldSelected(Position position) {
+			_controller.HandleRechableFieldSelected(position);
+		}
+
+		public void SetController(IBattlefieldViewController controller) {
+			_controller = controller;
 		}
 
 	}
