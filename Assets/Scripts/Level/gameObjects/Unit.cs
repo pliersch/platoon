@@ -22,8 +22,8 @@ namespace level.gameObjects {
 			_actionHandler.SetInteractionHandler(this);
 		}
 
-		public GameObject GetGameObject {
-			get { return _go; }
+		public GameObject GetGameObject () {
+			 return _go; 
 		}
 
 		public void SetArmy(Army army) {
@@ -33,6 +33,10 @@ namespace level.gameObjects {
 		public void HandleClick() {
 			Debug.Log("pos " + Position.ToString());
 			_army.HandleUnitSelected(this);
+		}
+
+		public void Move(Field[] way) {
+			
 		}
 
 	}

@@ -28,8 +28,8 @@ namespace level.battlefield {
 			}
 		}
 
-		public void HandleRechableFieldSelected(Position position) {
-			_controller.HandleRechableFieldSelected(position);
+		public void HandleTargetFieldSelected(Position position) {
+			_controller.HandleTargetFieldSelected(position);
 		}
 
 		public void SetController(IBattlefieldViewController controller) {

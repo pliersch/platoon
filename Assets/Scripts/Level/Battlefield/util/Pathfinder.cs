@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
-namespace level.battlefield {
+namespace level.battlefield.util {
 
 	public class Pathfinder {
 
@@ -22,7 +21,8 @@ namespace level.battlefield {
 			_closedFields = new List<Field>();
 			Field chckField;
 
-			var currentField = _fields[position.x, position.z];
+			var startField = _fields[position.x, position.z];
+			var currentField = startField;
 			currentField.RemainedActionPoint = actionPoints;
 			_closedFields.Add(currentField);
 
@@ -59,6 +59,7 @@ namespace level.battlefield {
 					}
 				}
 				_closedFields.Add(currentField);
+				_closedFields.Remove(startField);
 			}
 			return _closedFields.ToArray();
 		}

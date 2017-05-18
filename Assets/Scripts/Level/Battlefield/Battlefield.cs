@@ -1,4 +1,4 @@
-﻿using level.battlefield.Util;
+﻿using level.battlefield.util;
 using level.gameObjects;
 using UnityEngine;
 
@@ -44,11 +44,10 @@ namespace level.battlefield {
 			}
 		}
 
-		public void HandleRechableFieldSelected(Position position) {
+		public void HandleTargetFieldSelected(Position position) {
 			Field[] way = _model.GetWay(position);
-			// TODO only for debug. if ok, call MoveUnit!
-			_view.ShowReachableFields(way);
-			Debug.Log(" dffgfsdb");
+			_army.MoveActiveUnit(way);
+
 		}
 
 	}

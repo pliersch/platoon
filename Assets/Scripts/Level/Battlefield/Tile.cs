@@ -34,7 +34,7 @@ namespace level.battlefield {
 		}
 
 		private void OnMouseUp() {
-			_handler.HandleRechableFieldSelected(_position);
+			_handler.HandleTargetFieldSelected(_position);
 		}
 
 		private void OnMouseExit() {

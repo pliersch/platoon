@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -101,12 +103,12 @@
     <Compile Include="Assets\Scripts\level\battlefield\BattlefieldView.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Field.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\IBattlefieldViewController.cs" />
-    <Compile Include="Assets\Scripts\level\battlefield\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\util\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Position.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\PrefabFactory.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Tile.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\TileActionHandler.cs" />
-    <Compile Include="Assets\Scripts\level\battlefield\Util\LevelChecker.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\util\LevelChecker.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Army.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Tank.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Unit.cs" />

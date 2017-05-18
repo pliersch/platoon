@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace level.battlefield.Util {
+namespace level.battlefield.util {
 
 	public class LevelChecker {
 

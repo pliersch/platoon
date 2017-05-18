@@ -2,7 +2,7 @@
 
 	public interface ITileActionHandler {
 
-		void HandleRechableFieldSelected(Position position);
+		void HandleTargetFieldSelected(Position position);
 
 	}
 
