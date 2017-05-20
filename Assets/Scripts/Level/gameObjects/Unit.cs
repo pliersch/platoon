@@ -38,7 +38,7 @@ namespace level.gameObjects {
 		}
 
 		public void Move(Field[] way) {
-			_go.GetComponent<TankMovement>().Go(way);
+			_go.GetComponent<TankMovement>().Move(way);
 		}
 
 	}
