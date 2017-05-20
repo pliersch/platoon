@@ -21,16 +21,16 @@ namespace Tanks {
 		}
 
 		private void OnMouseOver() {
-			Debug.Log("mouse over " + gameObject.name);
+//			Debug.Log("mouse over " + gameObject.name);
 		}
 
 		public void OnPointerDown(PointerEventData eventData) {
 			_cameraPosition = _cameraFollow.transform.position;
-			Debug.Log(" OnPointerDown");
+//			Debug.Log(" OnPointerDown");
 		}
 
 		public void OnPointerUp(PointerEventData eventData) {
-			Debug.Log(" OnPointerUp");
+//			Debug.Log(" OnPointerUp");
 			if (_cameraPosition != _cameraFollow.transform.position) {
 				return;
 			}

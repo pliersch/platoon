@@ -1,114 +1,132 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using level.battlefield;
+using UnityEngine;
 
 namespace Tanks {
 
-	public class TankMovement : MonoBehaviour
-	{
-		public int m_PlayerNumber = 1;              // Used to identify which tank belongs to which player.  This is set by this tank's manager.
-		public float m_Speed = 12f;                 // How fast the tank moves forward and back.
-		public float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
-		public AudioSource m_MovementAudio;         // Reference to the audio source used to play engine sounds. NB: different to the shooting audio source.
-		public AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
-		public AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
-		public float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
+	public class TankMovement : MonoBehaviour {
 
+		public float _turnSpeed = 180f; // How fast the tank turns in degrees per second.
 
-		private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
-		private string m_TurnAxisName;              // The name of the input axis for turning.
-		private Rigidbody m_Rigidbody;              // Reference used to move the tank.
-		private float m_MovementInputValue;         // The current value of the movement input.
-		private float m_TurnInputValue;             // The current value of the turn input.
-		private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
+		// Reference to the audio source used to play engine sounds. NB: different to the shooting audio source.
+		public AudioSource _movementAudio;
 
+		public AudioClip _engineDriving; // Audio to play when the tank is moving.
+		public float _pitchRange = 0.1f; // The amount by which the pitch of the engine noises can vary.
+
+		private Rigidbody _rigidbody; // Reference used to move the tank.
+		private float _originalPitch; // The pitch of the audio source at the start of the scene.
+
+		private int _currentFieldIndex;
+		private Vector3 _checkPoint;
+		private Field[] _way;
+		private float _speed;
+		private Vector3 _movement;
+		private bool _isMoving;
 
 		private void Awake() {
-			m_Rigidbody = GetComponent<Rigidbody>();
+			_rigidbody = GetComponent<Rigidbody>();
 		}
-
 
 		private void OnEnable() {
-			// When the tank is turned on, make sure it's not kinematic.
-			m_Rigidbody.isKinematic = false;
+			_isMoving = false;
+			_rigidbody.isKinematic = false;
 
-			// Also reset the input values.
-			m_MovementInputValue = 0f;
-			m_TurnInputValue = 0f;
+			_speed = 0;
+			_movement = Vector3.zero;
 		}
-
 
 		private void OnDisable() {
-			// When the tank is turned off, set it to kinematic so it stops moving.
-			m_Rigidbody.isKinematic = true;
+			_rigidbody.isKinematic = true;
 		}
-
 
 		private void Start() {
-			// The axes names are based on player number.
-			m_MovementAxisName = "Vertical" + m_PlayerNumber;
-			m_TurnAxisName = "Horizontal" + m_PlayerNumber;
-
-			// Store the original pitch of the audio source.
-			m_OriginalPitch = m_MovementAudio.pitch;
+			_originalPitch = _movementAudio.pitch;
 		}
-
 
 		private void Update() {
-			// Store the value of both input axes.
-			m_MovementInputValue = Input.GetAxis(m_MovementAxisName);
-			m_TurnInputValue = Input.GetAxis(m_TurnAxisName);
-
+			if (!_isMoving) {
+				return;
+			}
 			EngineAudio();
-		}
-
-
-		private void EngineAudio() {
-			// If there is no input (the tank is stationary)...
-			if (Mathf.Abs(m_MovementInputValue) < 0.1f && Mathf.Abs(m_TurnInputValue) < 0.1f) {
-				// ... and if the audio source is currently playing the driving clip...
-				if (m_MovementAudio.clip == m_EngineDriving) {
-					// ... change the clip to idling and play it.
-					m_MovementAudio.clip = m_EngineIdling;
-					m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
-					m_MovementAudio.Play();
-				}
-			} else {
-				// Otherwise if the tank is moving and if the idling clip is currently playing...
-				if (m_MovementAudio.clip == m_EngineIdling) {
-					// ... change the clip to driving and play.
-					m_MovementAudio.clip = m_EngineDriving;
-					m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
-					m_MovementAudio.Play();
+			_rigidbody.MovePosition(_rigidbody.position + _movement);
+			if (IsCheckPointReached()) {
+				if (IsTargetFieldReached()) {
+					StopMoving();
+				} else {
+					SetNextCheckPoint();
+					Turn2NextCheckPoint();
 				}
 			}
 		}
 
-
-		private void FixedUpdate() {
-			// Adjust the rigidbodies position and orientation in FixedUpdate.
-			Move();
-			Turn();
+		private bool IsTargetFieldReached() {
+			return _currentFieldIndex == _way.Length - 1;
 		}
 
-
-		private void Move() {
-			// Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
-			Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
-
-			// Apply this movement to the rigidbody's position.
-			m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+		private void StopMoving() {
+			_isMoving = false;
+			_speed = 0;
+			_movement = Vector3.zero;
+			_movementAudio.Stop();
 		}
 
+		private void SetNextCheckPoint() {
+			_checkPoint = _way[++_currentFieldIndex].RealPosition;
+		}
+
+		private void Turn2NextCheckPoint() {
+			Position nextPosition = _way[_currentFieldIndex].Position;
+			Position lastPosition = _way[_currentFieldIndex - 1].Position;
+			if (nextPosition.x > lastPosition.x) {
+				_movement = new Vector3(_speed, 0, 0);
+			} else if (nextPosition.x < lastPosition.x) {
+				_movement = new Vector3(-_speed, 0, 0);
+			} else if (nextPosition.z > lastPosition.z) {
+				_movement = new Vector3(0, 0, _speed);
+			} else if (nextPosition.z < lastPosition.z) {
+				_movement = new Vector3(0, 0, -_speed);
+			}
+		}
+
+		private bool IsCheckPointReached() {
+			return Math.Abs(_rigidbody.position.x - _checkPoint.x) < 0.01f &&
+			       Math.Abs(_rigidbody.position.z - _checkPoint.z) < 0.01f;
+		}
+
+		private void EngineAudio() {
+			_movementAudio.pitch = UnityEngine.Random.Range(_originalPitch - _pitchRange, _originalPitch + _pitchRange);
+			_movementAudio.Play();
+		}
+
+		public void Go(Field[] way) {
+			_isMoving = true;
+			_way = way;
+			_speed = 0.5f;
+			_currentFieldIndex = 0;
+			SetNextCheckPoint();
+			Turn2NextCheckPoint();
+
+//			int diffX = way[1].Position.x - way[0].Position.x;
+//			if (diffX != 0) {
+//				_turnInputValue = diffX * 0.35f;
+//				//Turn();
+//			}
+			//_checkPoint = way[_currentFieldIndex].RealPosition;
+		}
 
 		private void Turn() {
-			// Determine the number of degrees to be turned based on the input, speed and time between frames.
-			float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-
-			// Make this into a rotation in the y axis.
-			Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-
-			// Apply this rotation to the rigidbody's rotation.
-			m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+//			// Determine the number of degrees to be turned based on the input, speed and time between frames.
+//			float turn = _turnInputValue * _turnSpeed * Time.deltaTime;
+//
+//			// Make this into a rotation in the y axis.
+//			Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+//
+//			// Apply this rotation to the rigidbody's rotation.
+//			_rigidbody.MoveRotation(_rigidbody.rotation * turnRotation);
 		}
+
 	}
 
 }
