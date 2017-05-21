@@ -22,7 +22,7 @@ namespace level.battlefield {
 		}
 
 		public void HandleUnitSelected(Unit unit) {
-			Field[] reachableFields = _model.GetReachableFields(unit.Position);
+			Field[] reachableFields = _model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints());
 			_view.ShowReachableFields(reachableFields);
 		}
 

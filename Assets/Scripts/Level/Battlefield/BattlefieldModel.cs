@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using level.battlefield.util;
 using level.gameObjects;
 using UnityEngine;
@@ -55,8 +56,8 @@ namespace level.battlefield {
 			return _fields;
 		}
 
-		public Field[] GetReachableFields(Position position) {
-			Field[] fields = _pathfinder.GetReachableFields(position, 5);
+		internal Field[] GetReachableFields(Position position, int actionPoints) {
+			Field[] fields = _pathfinder.GetReachableFields(position, actionPoints);
 			return fields;
 		}
 
