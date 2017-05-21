@@ -46,6 +46,7 @@ namespace level.battlefield {
 
 		public void HandleTargetFieldSelected(Position position) {
 			Field[] way = _model.GetWay(position);
+			_model.UpdateFreeFields(way);
 			_view.ShowReachableFields(way);
 			_army.MoveActiveUnit(way);
 

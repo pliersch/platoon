@@ -79,7 +79,7 @@ namespace level.battlefield {
 //
 //		}
 		public Field[] GetWay(Position targetPosition) {
-			List<Field> endToStart = new List<Field> {};
+			List<Field> endToStart = new List<Field>();
 			Field current = GetField(targetPosition);
 			endToStart.Add(current);
 			Field parent = current.Parent;
@@ -89,6 +89,11 @@ namespace level.battlefield {
 			}
 			endToStart.Reverse();
 			return endToStart.ToArray();
+		}
+
+		public void UpdateFreeFields(Field[] way) {
+			way[0].IsFree = true;
+			way[way.Length - 1].IsFree = false;
 		}
 
 	}

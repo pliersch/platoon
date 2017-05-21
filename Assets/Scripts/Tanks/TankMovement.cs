@@ -8,6 +8,7 @@ namespace Tanks {
 
 		// Reference to the audio source used to play engine sounds. NB: different to the shooting audio source.
 		public AudioSource _movementAudio;
+
 		public AudioClip _engineDriving; // Audio to play when the tank is moving.
 		private Rigidbody _rigidbody; // Reference used to move the tank.
 		private int _currentFieldIndex;
@@ -46,6 +47,15 @@ namespace Tanks {
 			}
 		}
 
+		public void Move(Field[] way) {
+			_isMoving = true;
+			_way = way;
+			_currentFieldIndex = 0;
+			_movementAudio.Play();
+			SetNextCheckPoint();
+			Turn2NextCheckPoint();
+		}
+
 		private bool IsTargetFieldReached() {
 			return _currentFieldIndex == _way.Length - 1;
 		}
@@ -54,6 +64,7 @@ namespace Tanks {
 			_isMoving = false;
 			_movement = Vector3.zero;
 			_movementAudio.Stop();
+			enabled = false;
 		}
 
 		private void SetNextCheckPoint() {
@@ -81,26 +92,6 @@ namespace Tanks {
 		private bool IsCheckPointReached() {
 			return Math.Abs(_rigidbody.position.x - _checkPoint.x) < 0.01f &&
 			       Math.Abs(_rigidbody.position.z - _checkPoint.z) < 0.01f;
-		}
-
-		public void Move(Field[] way) {
-			_isMoving = true;
-			_way = way;
-			_currentFieldIndex = 0;
-			_movementAudio.Play();
-			SetNextCheckPoint();
-			Turn2NextCheckPoint();
-		}
-
-		private void Turn() {
-//			// Determine the number of degrees to be turned based on the input, speed and time between frames.
-//			float turn = _turnInputValue * _turnSpeed * Time.deltaTime;
-//
-//			// Make this into a rotation in the y axis.
-//			Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-//
-//			// Apply this rotation to the rigidbody's rotation.
-//			_rigidbody.MoveRotation(_rigidbody.rotation * turnRotation);
 		}
 
 	}

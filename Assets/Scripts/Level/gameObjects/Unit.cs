@@ -38,7 +38,10 @@ namespace level.gameObjects {
 		}
 
 		public void Move(Field[] way) {
-			_go.GetComponent<TankMovement>().Move(way);
+			TankMovement movement = _go.GetComponent<TankMovement>();
+			movement.enabled = true;
+			movement.Move(way);
+			Position = way[way.Length - 1].Position;
 		}
 
 	}

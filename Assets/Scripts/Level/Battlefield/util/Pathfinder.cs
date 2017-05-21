@@ -17,6 +17,7 @@ namespace level.battlefield.util {
 		}
 
 		public Field[] GetReachableFields(Position position, int actionPoints) {
+			CleanUpParents();
 			_openFields = new List<Field>();
 			_closedFields = new List<Field>();
 			Field chckField;
@@ -106,6 +107,12 @@ namespace level.battlefield.util {
 			neighbours[3] = new Position(xPos - 1, zPos);
 
 			return neighbours;
+		}
+
+		private void CleanUpParents() {
+			foreach (Field field in _fields) {
+				field.Parent = null;
+			}
 		}
 
 	}

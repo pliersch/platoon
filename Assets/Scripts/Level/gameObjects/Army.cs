@@ -20,9 +20,6 @@ namespace level.gameObjects {
 		}
 
 		public void HandleUnitSelected(Unit unit) {
-			if (unit == _activeUnit) {
-				return;
-			}
 			_activeUnit = unit;
 			_battlefield.HandleUnitSelected(unit);
 		}
