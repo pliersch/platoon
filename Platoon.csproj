@@ -100,11 +100,14 @@
     <Compile Include="Assets\Scripts\level\battlefield\BattlefieldModel.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\BattlefieldView.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Field.cs" />
-    <Compile Include="Assets\Scripts\level\battlefield\Pathfinder.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\IBattlefieldViewController.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Position.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\PrefabFactory.cs" />
     <Compile Include="Assets\Scripts\level\battlefield\Tile.cs" />
-    <Compile Include="Assets\Scripts\level\battlefield\Util\LevelChecker.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\TileActionHandler.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\actions\MoveAction.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\util\LevelChecker.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\util\Pathfinder.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Army.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Tank.cs" />
     <Compile Include="Assets\Scripts\level\gameObjects\Unit.cs" />

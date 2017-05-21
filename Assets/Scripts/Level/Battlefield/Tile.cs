@@ -4,13 +4,12 @@ namespace level.battlefield {
 
 	public class Tile : MonoBehaviour {
 
-		public int WayCost { get; set; }
-		public bool IsFree { get; set; }
-		public int RemainedActionPoint { get; set; }
 		public Color _colorOver;
 		public Color _colorOut;
 		private MeshRenderer _meshRenderer;
 		private bool _isOver;
+		private Position _position;
+		private ITileActionHandler _handler;
 
 		private void Start() {
 			_meshRenderer = gameObject.GetComponent<MeshRenderer>();
@@ -34,9 +33,21 @@ namespace level.battlefield {
 			Debug.Log("mouse down");
 		}
 
+		private void OnMouseUp() {
+			_handler.HandleTargetFieldSelected(_position);
+		}
+
 		private void OnMouseExit() {
 			_isOver = false;
 			_meshRenderer.material.color = _colorOut;
+		}
+
+		public void SetActionHandler(ITileActionHandler handler) {
+			_handler = handler;
+		}
+
+		public void SetPosition(Position fieldPosition) {
+			_position = fieldPosition;
 		}
 
 	}

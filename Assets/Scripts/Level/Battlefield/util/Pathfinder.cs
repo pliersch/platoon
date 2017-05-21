@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
-namespace level.battlefield {
+namespace level.battlefield.util {
 
 	public class Pathfinder {
 
@@ -18,11 +17,13 @@ namespace level.battlefield {
 		}
 
 		public Field[] GetReachableFields(Position position, int actionPoints) {
+			CleanUpParents();
 			_openFields = new List<Field>();
 			_closedFields = new List<Field>();
 			Field chckField;
 
-			var currentField = _fields[position.x, position.z];
+			var startField = _fields[position.x, position.z];
+			var currentField = startField;
 			currentField.RemainedActionPoint = actionPoints;
 			_closedFields.Add(currentField);
 
@@ -59,6 +60,7 @@ namespace level.battlefield {
 					}
 				}
 				_closedFields.Add(currentField);
+				_closedFields.Remove(startField);
 			}
 			return _closedFields.ToArray();
 		}
@@ -105,6 +107,12 @@ namespace level.battlefield {
 			neighbours[3] = new Position(xPos - 1, zPos);
 
 			return neighbours;
+		}
+
+		private void CleanUpParents() {
+			foreach (Field field in _fields) {
+				field.Parent = null;
+			}
 		}
 
 	}

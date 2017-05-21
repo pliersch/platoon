@@ -15,14 +15,18 @@ namespace level.gameObjects {
 			_units = units;
 		}
 
+		public Unit GetActiveUnit() {
+			return _activeUnit;
+		}
+
 		public void HandleUnitSelected(Unit unit) {
-			if (unit == _activeUnit) {
-				return;
-			}
 			_activeUnit = unit;
 			_battlefield.HandleUnitSelected(unit);
 		}
 
+		internal void MoveActiveUnit(Field[] way) {
+			_activeUnit.Move(way);
+		}
 	}
 
 }
