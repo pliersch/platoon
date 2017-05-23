@@ -11,13 +11,19 @@ namespace level.gameObjects {
 		public Position Position { get; set; }
 		protected GameObject _go;
 		protected TankActionHandler _actionHandler;
-		protected Army _army;
+		private readonly Army _army;
 		public int ActionPoints { get; set; }
 		protected int _remainingActionPoints;
 
-		protected Unit(GameObject go, Position position) {
+		public Army Army {
+			get { return _army; }
+		}
+
+
+		protected Unit(GameObject go, Position position, Army army) {
 			Position = position;
 			_go = go;
+			_army = army;
 			_actionHandler = go.GetComponent<TankActionHandler>();
 			_actionHandler.SetInteractionHandler(this);
 		}
@@ -30,12 +36,7 @@ namespace level.gameObjects {
 			return _remainingActionPoints;
 		}
 
-		public void SetArmy(Army army) {
-			_army = army;
-		}
-
 		public void HandleClick() {
-//			Debug.Log("pos " + Position.ToString());
 			_army.HandleUnitSelected(this);
 		}
 
@@ -46,6 +47,10 @@ namespace level.gameObjects {
 			Field targetField = way[way.Length - 1];
 			Position = targetField.Position;
 			_remainingActionPoints = targetField.RemainedActionPoint;
+		}
+
+		public void ResetActionPoints() {
+			_remainingActionPoints = ActionPoints;
 		}
 
 	}

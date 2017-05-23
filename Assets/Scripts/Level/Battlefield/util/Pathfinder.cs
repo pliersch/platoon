@@ -109,6 +109,7 @@ namespace level.battlefield.util {
 			return neighbours;
 		}
 
+		// TODO better to safe reachable fields and clean up only these fields
 		private void CleanUpParents() {
 			foreach (Field field in _fields) {
 				field.Parent = null;
