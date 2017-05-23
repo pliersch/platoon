@@ -15,9 +15,6 @@ namespace level.battlefield {
 		}
 
 		internal void ShowReachableFields(Field[] reachableFields) {
-			foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Field")) {
-				Destroy(tile);
-			}
 			foreach (var field in reachableFields) {
 				GameObject go =
 					Instantiate(_fieldPrefab, field.RealPosition, _fieldPrefab.transform.rotation);
@@ -34,6 +31,12 @@ namespace level.battlefield {
 
 		public void SetController(IBattlefieldViewController controller) {
 			_controller = controller;
+		}
+
+		public void DestroyReachableFields() {
+			foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Field")) {
+				Destroy(tile);
+			}
 		}
 
 	}

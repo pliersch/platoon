@@ -27,6 +27,13 @@ namespace level.gameObjects {
 		internal void MoveActiveUnit(Field[] way) {
 			_activeUnit.Move(way);
 		}
+
+		public void ResetActionPoints() {
+			foreach (Unit unit in _units) {
+				unit.ResetActionPoints();
+			}
+		}
+
 	}
 
 }
