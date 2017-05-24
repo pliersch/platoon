@@ -5,6 +5,7 @@ namespace level.battlefield {
 	public class Field {
 
 	// TODO use readonly!
+	// TODO use struct not class?
 
 		public Vector3 RealPosition { get; set; }
 		public int WayCost { get; set; }
