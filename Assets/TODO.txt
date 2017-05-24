@@ -1,1 +1,3 @@
-Tile prefab hat graue Farbe. Sollte schon initial "Mouse Out" Color haben
+- Tile prefab hat graue Farbe. Sollte schon initial "Mouse Out" Color haben
+- Tank Skalierung ist 2, sollte 1 sein (Maya neu exportieren). Gibt im Local Space Probleme.
+  Skalierung von Gun muss daher auf 0,5 gesetzt werden.

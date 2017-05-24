@@ -31,7 +31,16 @@ namespace level.battlefield {
 			if (unit.Army == _activeArmy) {
 				Field[] reachableFields = _model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints());
 				_view.ShowReachableFields(reachableFields);
+			} else if (_activeArmy.GetActiveUnit() != null) {
+				Attack(unit);
 			}
+		}
+
+		private void Attack(Unit defender) {
+			//_activeArmy.Attack(defender);
+			Unit offener = _activeArmy.GetActiveUnit();
+			Vector3 distance = _model.GetDistance(offener.RealPosition, defender.RealPosition);
+			offener.Fire(distance);
 		}
 
 		public void HandleTargetFieldSelected(Position position) {
@@ -73,10 +82,11 @@ namespace level.battlefield {
 			Unit[] units = new Unit[count];
 			army = new Army(this, units);
 			for (int i = 0; i < count; i++) {
-				var position = _model.ConvertCoordinateToPosition(spawns[i].transform.localPosition);
+				Vector3 localPosition = spawns[i].transform.localPosition;
+				var position = _model.ConvertCoordinateToPosition(localPosition);
 				Field field = _model.GetField(position);
 				GameObject go = _view.AddUnit(_factory.tank, field.RealPosition);
-				Unit unit = new Tank(go, position, army);
+				Unit unit = new Tank(go, army, position, localPosition);
 				units[i] = unit;
 				_model.UpdateAddedUnit(unit, position);
 			}

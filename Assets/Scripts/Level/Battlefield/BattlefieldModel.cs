@@ -97,6 +97,16 @@ namespace level.battlefield {
 			way[way.Length - 1].IsFree = false;
 		}
 
+		public float GetDistance(Position pos1, Position pos2) {
+			float x = Mathf.Abs(pos1.x - pos2.x) * _tileSize;
+			float z = Mathf.Abs(pos1.z - pos2.z) * _tileSize;
+			return Mathf.Sqrt(x * x + z * z);
+		}
+
+		public Vector3 GetDistance(Vector3 pos1, Vector3 pos2) {
+			return pos2 - pos1;
+		}
+
 	}
 
 }
