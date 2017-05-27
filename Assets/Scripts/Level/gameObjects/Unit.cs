@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using level.battlefield;
-using level.battlefield.actions;
+﻿using level.battlefield;
 using Tanks;
 using UnityEngine;
 
@@ -57,6 +55,10 @@ namespace level.gameObjects {
 		}
 
 		public void Fire(Vector3 target) {
+			if (_remainingActionPoints == 0) {
+				return;
+			}
+			_remainingActionPoints--;
 			_go.transform.LookAt(target);
 			//			TankShooting shooting = _go.GetComponent<TankShooting>();
 			LineShooting shooting = _go.GetComponentInChildren<LineShooting>();

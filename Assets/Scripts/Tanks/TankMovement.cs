@@ -36,7 +36,7 @@ namespace Tanks {
 			if (!_isMoving) {
 				return;
 			}
-			_rigidbody.MovePosition(_rigidbody.position + _movement);
+			_rigidbody.MovePosition(_rigidbody.transform.position + _movement);
 			if (IsCheckPointReached()) {
 				if (IsTargetFieldReached()) {
 					StopMoving();
@@ -90,8 +90,8 @@ namespace Tanks {
 		}
 
 		private bool IsCheckPointReached() {
-			return Math.Abs(_rigidbody.position.x - _checkPoint.x) < 0.01f &&
-			       Math.Abs(_rigidbody.position.z - _checkPoint.z) < 0.01f;
+			return Math.Abs(_rigidbody.transform.position.x - _checkPoint.x) < 0.01f &&
+			       Math.Abs(_rigidbody.transform.position.z - _checkPoint.z) < 0.01f;
 		}
 
 	}
