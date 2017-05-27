@@ -40,7 +40,7 @@ namespace level.battlefield {
 			//_activeArmy.Attack(defender);
 			Unit offener = _activeArmy.GetActiveUnit();
 			Vector3 distance = _model.GetDistance(offener.RealPosition, defender.RealPosition);
-			offener.Fire(distance);
+			offener.Fire(defender.RealPosition);
 		}
 
 		public void HandleTargetFieldSelected(Position position) {

@@ -57,10 +57,12 @@ namespace level.gameObjects {
 		}
 
 		public void Fire(Vector3 target) {
-//			TankShooting shooting = _go.GetComponent<TankShooting>();
+			_go.transform.LookAt(target);
+			//			TankShooting shooting = _go.GetComponent<TankShooting>();
 			LineShooting shooting = _go.GetComponentInChildren<LineShooting>();
-			shooting.Shoot(target);
-
+			Vector3 offset = target - _go.transform.position;
+			float distance = Mathf.Sqrt(offset.x * offset.x + offset.z * offset.z);
+			shooting.Shoot(distance);
 		}
 
 	}

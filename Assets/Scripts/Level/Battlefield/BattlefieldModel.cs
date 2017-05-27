@@ -39,8 +39,8 @@ namespace level.battlefield {
 			_fields = new Field[rows, columns];
 			for (int x = 0; x < rows; x++) {
 				for (int y = 0; y < columns; y++) {
-					float xPos = x * _tileSize + _tileCenter;
-					float zPos = y * _tileSize + _tileCenter;
+					float xPos = x * _tileSize + halfSize;
+					float zPos = y * _tileSize + halfSize;
 					Field field = new Field {
 						WayCost = 1,
 						IsFree = true,

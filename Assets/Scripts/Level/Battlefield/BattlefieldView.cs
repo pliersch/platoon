@@ -6,7 +6,6 @@ namespace level.battlefield {
 	public class BattlefieldView : MonoBehaviour, ITileActionHandler {
 
 		public GameObject _fieldPrefab;
-		public GameObject _pivot;
 		private IBattlefieldViewController _controller;
 
 		public GameObject AddUnit(GameObject unit, Vector3 position) {
