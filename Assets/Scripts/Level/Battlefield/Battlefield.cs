@@ -9,6 +9,7 @@ namespace level.battlefield {
 		public BattlefieldModel _model;
 		public BattlefieldView _view;
 		public PrefabFactory _factory;
+		public LevelChecker _levelChecker;
 		public int _rows;
 		public int _columns;
 		private Army _myArmy;
@@ -18,14 +19,16 @@ namespace level.battlefield {
 		// TODO: move LevelChecker and all of generation/initializing to a factory. Don´t want see here
 		// TODO: better Use Unity Editor scripts and check it before compile (no code in final game)
 		private void Start() {
-			float tileSize = new LevelChecker().CheckTileSize(_factory.tile);
-			_model.GenerateFields(_rows, _columns, tileSize, transform.position);
+			float tileSize = _levelChecker.CheckTileSize(_factory.tile);
+
+			Field[,] fields = _model.GenerateFields(_rows, _columns, tileSize, transform.position);
+			_levelChecker.FindOccupiedFields(fields, _factory);
 			_view.SetController(this);
 			AddUnits();
 		}
 
 		public void HandleUnitSelected(Unit unit) {
-		_view.DestroyReachableFields(); // 
+		_view.DestroyReachableFields();
 			// TODO re-enable if KI exists
 			//		if (unit.Army == _myArmy && _myArmy == _activeArmy) {
 			if (unit.Army == _activeArmy) {
@@ -39,7 +42,6 @@ namespace level.battlefield {
 		private void Attack(Unit defender) {
 			//_activeArmy.Attack(defender);
 			Unit offener = _activeArmy.GetActiveUnit();
-			Vector3 distance = _model.GetDistance(offener.RealPosition, defender.RealPosition);
 			offener.Fire(defender.RealPosition);
 		}
 

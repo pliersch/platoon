@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace level.battlefield {
 
@@ -18,9 +17,10 @@ namespace level.battlefield {
 				GameObject go =
 					Instantiate(_fieldPrefab, field.RealPosition, _fieldPrefab.transform.rotation);
 				Tile tile = (Tile) go.GetComponent(typeof(Tile));
+				// TODO set controller as actionhandler maybe
 				tile.SetActionHandler(this);
 				tile.SetPosition(field.Position);
-				tile.SetText(field.Position.x + " | "+ field.Position.z);
+				tile.SetText(field.Position.x + " | " + field.Position.z);
 			}
 		}
 

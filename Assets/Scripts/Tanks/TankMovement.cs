@@ -36,7 +36,8 @@ namespace Tanks {
 			if (!_isMoving) {
 				return;
 			}
-			_rigidbody.MovePosition(_rigidbody.transform.position + _movement);
+			_rigidbody.transform.position += _movement;
+			//_rigidbody.MovePosition(_rigidbody.transform.position + _movement);
 			if (IsCheckPointReached()) {
 				if (IsTargetFieldReached()) {
 					StopMoving();
@@ -75,16 +76,16 @@ namespace Tanks {
 			Position nextPosition = _way[_currentFieldIndex].Position;
 			Position lastPosition = _way[_currentFieldIndex - 1].Position;
 			if (nextPosition.x > lastPosition.x) {
-				_rigidbody.rotation = Quaternion.Euler(0f, 90f, 0f);
+				_rigidbody.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 				_movement = new Vector3(_speed, 0, 0);
 			} else if (nextPosition.x < lastPosition.x) {
-				_rigidbody.rotation = Quaternion.Euler(0f, -90f, 0f);
+				_rigidbody.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
 				_movement = new Vector3(-_speed, 0, 0);
 			} else if (nextPosition.z > lastPosition.z) {
-				_rigidbody.rotation = Quaternion.Euler(0f, 0f, 0f);
+				_rigidbody.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 				_movement = new Vector3(0, 0, _speed);
 			} else if (nextPosition.z < lastPosition.z) {
-				_rigidbody.rotation = Quaternion.Euler(0f, 180f, 0f);
+				_rigidbody.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 				_movement = new Vector3(0, 0, -_speed);
 			}
 		}
