@@ -19,7 +19,7 @@ namespace Tanks {
 		public void Fire(float distance) {
 			// Create an instance of the shell and store a reference to it's rigidbody.
 			Rigidbody shellInstance =
-				Instantiate(_shell, _fireTransform.position, _fireTransform.rotation) as Rigidbody;
+				Instantiate(_shell, _fireTransform.position, _fireTransform.rotation);
 
 			// Set the shell's velocity to the launch force in the fire position's forward direction.
 			shellInstance.velocity = distance * _fireTransform.forward;

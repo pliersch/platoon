@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using level.battlefield.util;
 using level.gameObjects;
 using UnityEngine;
@@ -12,12 +11,7 @@ namespace level.battlefield {
 
 		private Field[,] _fields;
 
-//		private Vector3 _pivot;
 		private float _tileSize;
-
-		private float _tileCenter;
-//		private int _rows;
-//		private int _columns;
 
 		// TODO do we need param unit?
 		public void UpdateAddedUnit(Unit unit, Position position) {
@@ -35,7 +29,6 @@ namespace level.battlefield {
 //			_pivot = pivot;
 			_tileSize = tileSize;
 			float halfSize = _tileSize / 2;
-			_tileCenter = pivot.x + halfSize;
 			_fields = new Field[rows, columns];
 			for (int x = 0; x < rows; x++) {
 				for (int y = 0; y < columns; y++) {

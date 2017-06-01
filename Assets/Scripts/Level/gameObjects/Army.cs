@@ -1,6 +1,4 @@
-﻿using System;
-using level.battlefield;
-using UnityEngine;
+﻿using level.battlefield;
 
 namespace level.gameObjects {
 

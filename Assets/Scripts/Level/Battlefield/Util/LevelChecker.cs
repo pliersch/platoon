@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace level.battlefield.util {
 
-	public class LevelChecker {
+	public class LevelChecker : MonoBehaviour {
 
 		public float CheckTileSize(GameObject tile) {
 			Renderer fieldRenderer = tile.GetComponentInChildren<Renderer>();
@@ -15,17 +15,26 @@ namespace level.battlefield.util {
 			return width;
 		}
 
-//		public void CheckGround(GameObject tile) {
-//			_fildSize = new Vector2(width, depth);
-//			Renderer groundRenderer = GetComponentInChildren<Renderer>();
-//			int x = ((int)groundRenderer.bounds.size.x) / (int)width;
-//			int y = ((int)groundRenderer.bounds.size.z) / (int)depth;
-//			if (x != _rows) {
-//				Debug.LogError("Computed size of rows: " + x + " not " + _rows);
-//			}
-//			if (y != _columns) {
-//				Debug.LogError("Computed size of columns: " + y + " not " + _columns);
-//			}
+		public void FindOccupiedFields(Field[,] fields, PrefabFactory factory) {
+			foreach (Field field in fields) {
+				GameObject go =
+					Instantiate(factory.tile, field.RealPosition, factory.tile.transform.rotation);
+				Tile tile = (Tile)go.GetComponent(typeof(Tile));
+				ExplosionDamage(field, tile);
+			}
+		}
+
+		void ExplosionDamage(Field field, Tile tile) {
+			Collider[] hitColliders = Physics.OverlapSphere(tile.transform.position, 1);
+			int i = 0;
+			while (i < hitColliders.Length) {
+				if (hitColliders[i].CompareTag("Wall")) {
+					field.IsFree = false;
+				}
+				i++;
+			}
+			Destroy(tile.gameObject);
+		}
 
 	}
 
