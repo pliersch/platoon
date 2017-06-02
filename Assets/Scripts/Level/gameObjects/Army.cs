@@ -32,6 +32,10 @@ namespace level.gameObjects {
 			}
 		}
 
+		public void HandleUnitMovementComplete(Unit unit) {
+			_battlefield.HandleUnitMovementComplete(unit);
+		}
+
 	}
 
 }

@@ -40,6 +40,10 @@ namespace level.gameObjects {
 			_army.HandleUnitSelected(this);
 		}
 
+		public void HandleMovementComplete() {
+			_army.HandleUnitMovementComplete(this);
+		}
+
 		public void Move(Field[] way) {
 			TankMovement movement = _go.GetComponent<TankMovement>();
 			movement.enabled = true;

@@ -66,6 +66,7 @@ namespace Tanks {
 			_movement = Vector3.zero;
 			_movementAudio.Stop();
 			enabled = false;
+			GetComponentInParent<TankActionHandler>().OnMovementComplete();
 		}
 
 		private void SetNextCheckPoint() {

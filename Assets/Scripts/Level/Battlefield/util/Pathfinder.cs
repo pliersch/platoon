@@ -17,6 +17,9 @@ namespace level.battlefield.util {
 		}
 
 		public Field[] GetReachableFields(Position position, int actionPoints) {
+			if (actionPoints == 0) {
+				return new Field[0];
+			}
 			CleanUpParents();
 			_openFields = new List<Field>();
 			_closedFields = new List<Field>();
@@ -60,8 +63,8 @@ namespace level.battlefield.util {
 					}
 				}
 				_closedFields.Add(currentField);
-				_closedFields.Remove(startField);
 			}
+			_closedFields.Remove(startField);
 			return _closedFields.ToArray();
 		}
 

@@ -4,8 +4,6 @@ namespace level.battlefield {
 
 	public class Field {
 
-	// TODO use readonly!
-
 		public Vector3 RealPosition { get; set; }
 		public int WayCost { get; set; }
 		public Position Position { get; set; }
