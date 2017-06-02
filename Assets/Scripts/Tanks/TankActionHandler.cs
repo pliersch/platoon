@@ -38,6 +38,10 @@ namespace Tanks {
 			_handler.HandleClick();
 		}
 
+		public void OnMovementComplete() {
+			_handler.HandleMovementComplete();
+		}
+
 	}
 
 }

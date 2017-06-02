@@ -28,21 +28,25 @@ namespace level.battlefield {
 		}
 
 		public void HandleUnitSelected(Unit unit) {
-		_view.DestroyReachableFields();
+			_view.DestroyReachableFields();
 			// TODO re-enable if KI exists
 			//		if (unit.Army == _myArmy && _myArmy == _activeArmy) {
 			if (unit.Army == _activeArmy) {
-				Field[] reachableFields = _model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints());
-				_view.ShowReachableFields(reachableFields);
+				_view.ShowReachableFields(_model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints()));
 			} else if (_activeArmy.GetActiveUnit() != null) {
 				Attack(unit);
 			}
+		}
+
+		public void HandleUnitMovementComplete(Unit unit) {
+			_view.ShowReachableFields(_model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints()));
 		}
 
 		private void Attack(Unit defender) {
 			//_activeArmy.Attack(defender);
 			Unit offener = _activeArmy.GetActiveUnit();
 			offener.Fire(defender.RealPosition);
+			_view.ShowReachableFields(_model.GetReachableFields(offener.Position, offener.GetRemainingActionPoints()));
 		}
 
 		public void HandleTargetFieldSelected(Position position) {
