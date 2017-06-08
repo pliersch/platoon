@@ -1,4 +1,5 @@
-﻿using level.battlefield.util;
+﻿using System.Collections.Generic;
+using level.battlefield.util;
 using level.gameObjects;
 using UnityEngine;
 
@@ -14,7 +15,9 @@ namespace level.battlefield {
 		public int _columns;
 		private Army _myArmy;
 		private Army _enemyArmy;
-		private Army _activeArmy;
+		private Army _offenerArmy;
+		private Army _defenderArmy;
+		private List<Unit> _possibleTargets;
 
 		// TODO: move LevelChecker and all of generation/initializing to a factory. Don´t want see here
 		// TODO: better Use Unity Editor scripts and check it before compile (no code in final game)
@@ -28,25 +31,37 @@ namespace level.battlefield {
 		}
 
 		public void HandleUnitSelected(Unit unit) {
-			_view.DestroyReachableFields();
 			// TODO re-enable if KI exists
-			//		if (unit.Army == _myArmy && _myArmy == _activeArmy) {
-			if (unit.Army == _activeArmy) {
-				_view.ShowReachableFields(_model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints()));
-			} else if (_activeArmy.GetActiveUnit() != null) {
+			//		if (unit.Army == _myArmy && _myArmy == _offenerArmy) {
+			if (unit.Army == _offenerArmy) {
+				ShowReachableFields(unit);
+				_possibleTargets = FindPossibleTargets(unit);
+				//	_defenderArmy.UnHighlightUnits(_possibleTargets);
+				//	_defenderArmy.HighlightUnits(_possibleTargets);
+			} else if (_offenerArmy.GetActiveUnit() != null && _possibleTargets.Contains(unit)) {
 				Attack(unit);
 			}
 		}
 
 		public void HandleUnitMovementComplete(Unit unit) {
 			_view.ShowReachableFields(_model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints()));
+			_possibleTargets = FindPossibleTargets(unit);
 		}
 
 		private void Attack(Unit defender) {
-			//_activeArmy.Attack(defender);
-			Unit offener = _activeArmy.GetActiveUnit();
+			//_offenerArmy.Attack(defender);
+			Unit offener = _offenerArmy.GetActiveUnit();
 			offener.Fire(defender.RealPosition);
-			_view.ShowReachableFields(_model.GetReachableFields(offener.Position, offener.GetRemainingActionPoints()));
+			ShowReachableFields(offener);
+		}
+
+		private void ShowReachableFields(Unit unit) {
+			_view.DestroyReachableFields();
+			_view.ShowReachableFields(_model.GetReachableFields(unit.Position, unit.GetRemainingActionPoints()));
+		}
+
+		private List<Unit> FindPossibleTargets(Unit unit) {
+			return new Raycaster().FindPossibleTargets(unit, _enemyArmy.GetUnits());
 		}
 
 		public void HandleTargetFieldSelected(Position position) {
@@ -57,18 +72,25 @@ namespace level.battlefield {
 			//_view.ShowReachableFields(way);
 			// TODO re-enable if KI exists... OR NOT?
 //			_myArmy.MoveActiveUnit(way);
-			_activeArmy.MoveActiveUnit(way);
+			_offenerArmy.MoveActiveUnit(way);
 		}
 
 		public void HandleNextTurn() {
-			_activeArmy.ResetActionPoints();
-//			DisableArmy(_activeArmy);
+			_offenerArmy.ResetActionPoints();
+//			DisableArmy(_offenerArmy);
 			EnableNextArmy();
 		}
 
 		private void EnableNextArmy() {
-			_activeArmy = _myArmy == _activeArmy ? _enemyArmy : _myArmy;
+			if (_offenerArmy == _myArmy) {
+				_offenerArmy = _enemyArmy;
+				_defenderArmy = _myArmy;
+			} else {
+				_offenerArmy = _myArmy;
+				_defenderArmy = _enemyArmy;
+			}
 		}
+
 
 		/*------------------------------------------------------------------------------------------*/
 		/*-------------------------------------- Initilize -----------------------------------------*/
@@ -79,7 +101,8 @@ namespace level.battlefield {
 			GameObject[] enemySpawns = GameObject.FindGameObjectsWithTag("EnemySpawn");
 			InitUnits(out _myArmy, spawns);
 			InitUnits(out _enemyArmy, enemySpawns);
-			_activeArmy = _myArmy;
+			_offenerArmy = _myArmy;
+			_defenderArmy = _enemyArmy;
 		}
 
 

@@ -71,6 +71,26 @@ namespace level.gameObjects {
 			shooting.Shoot(distance);
 		}
 
+		public void Highlight() {
+//			MeshRenderer[] renderers = _go.GetComponentsInChildren<MeshRenderer>();
+//			foreach (MeshRenderer renderer in renderers) {
+//				//t.material.color = Color.blue;
+//				Color color = renderer.material.color;
+//				color.a = 0.8f;
+//				renderer.material.color = color;
+//			}
+		}
+
+		public void UnHighlight() {
+//			MeshRenderer[] renderers = _go.GetComponentsInChildren<MeshRenderer>();
+//			foreach (MeshRenderer renderer in renderers) {
+//				//t.material.color = Color.blue;
+//				Color color = renderer.material.color;
+//				color.b = 1;
+//				renderer.material.color = color;
+//			}
+		}
+
 	}
 
 }
