@@ -36,6 +36,22 @@ namespace level.gameObjects {
 			_battlefield.HandleUnitMovementComplete(unit);
 		}
 
+		public Unit[] GetUnits() {
+			return _units;
+		}
+
+		public void HighlightUnits(Unit[] units) {
+			foreach (Unit unit in units) {
+				unit.Highlight();
+			}
+		}
+
+		public void UnHighlightUnits(Unit[] units) {
+			foreach (Unit unit in units) {
+				unit.UnHighlight();
+			}
+		}
+
 	}
 
 }

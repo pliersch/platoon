@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Scripts\level\battlefield\util\Raycaster.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\TankManager.cs" />
     <Compile Include="Assets\Scripts\Pause.cs" />
