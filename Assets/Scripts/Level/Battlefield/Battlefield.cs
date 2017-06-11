@@ -37,8 +37,8 @@ namespace level.battlefield {
 				ShowReachableFields(unit);
 				_possibleTargets = FindPossibleTargets(unit);
 				//	_defenderArmy.UnHighlightUnits(_possibleTargets);
-				//	_defenderArmy.HighlightUnits(_possibleTargets);
-			} else if (_offenerArmy.GetActiveUnit() != null && _offenerArmy.GetActiveUnit().GetRemainingActionPoints() > 0 && _possibleTargets.Contains(unit)) {
+					_defenderArmy.HighlightUnits(_possibleTargets);
+			} else if (CanAttack(unit)) {
 				Attack(unit);
 			}
 		}
@@ -62,7 +62,13 @@ namespace level.battlefield {
 		}
 
 		private List<Unit> FindPossibleTargets(Unit unit) {
-			return new Raycaster().FindPossibleTargets(unit, _enemyArmy.GetUnits());
+			return new Raycaster().FindPossibleTargets(unit, _defenderArmy.GetUnits());
+		}
+
+		private bool CanAttack(Unit unit) {
+			return _offenerArmy.GetActiveUnit() != null
+			&& _offenerArmy.GetActiveUnit().GetRemainingActionPoints() > 0
+			&& _possibleTargets.Contains(unit);
 		}
 
 		public void HandleTargetFieldSelected(Position position) {

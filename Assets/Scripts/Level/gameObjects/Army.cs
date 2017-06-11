@@ -1,4 +1,5 @@
 ﻿using level.battlefield;
+using System.Collections.Generic;
 
 namespace level.gameObjects {
 
@@ -40,7 +41,7 @@ namespace level.gameObjects {
 			return _units;
 		}
 
-		public void HighlightUnits(Unit[] units) {
+		public void HighlightUnits(List<Unit> units) {
 			foreach (Unit unit in units) {
 				unit.Highlight();
 			}
