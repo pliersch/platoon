@@ -5,11 +5,11 @@ namespace level.gameObjects {
 
 	public class Army {
 
-		public Unit[] _units;
+		public List<Unit> _units;
 		private Unit _activeUnit;
 		private readonly Battlefield _battlefield;
 
-		public Army(Battlefield battlefield, Unit[] units) {
+		public Army(Battlefield battlefield, List<Unit> units) {
 			_battlefield = battlefield;
 			_units = units;
 		}
@@ -37,7 +37,7 @@ namespace level.gameObjects {
 			_battlefield.HandleUnitMovementComplete(unit);
 		}
 
-		public Unit[] GetUnits() {
+		public List<Unit> GetUnits() {
 			return _units;
 		}
 

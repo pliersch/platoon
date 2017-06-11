@@ -37,7 +37,7 @@ namespace level.battlefield {
 				ShowReachableFields(unit);
 				_possibleTargets = FindPossibleTargets(unit);
 				//	_defenderArmy.UnHighlightUnits(_possibleTargets);
-					_defenderArmy.HighlightUnits(_possibleTargets);
+				//	_defenderArmy.HighlightUnits(_possibleTargets);
 			} else if (CanAttack(unit)) {
 				Attack(unit);
 			}
@@ -115,7 +115,7 @@ namespace level.battlefield {
 
 		private void InitUnits(out Army army, GameObject[] spawns) {
 			int count = spawns.Length;
-			Unit[] units = new Unit[count];
+			List<Unit> units = new List<Unit>(count);
 			army = new Army(this, units);
 			for (int i = 0; i < count; i++) {
 				Vector3 localPosition = spawns[i].transform.localPosition;
@@ -123,7 +123,7 @@ namespace level.battlefield {
 				Field field = _model.GetField(position);
 				GameObject go = _view.AddUnit(_factory.tank, field.RealPosition);
 				Unit unit = new Tank(go, army, position, localPosition);
-				units[i] = unit;
+				units.Add(unit);
 				_model.UpdateAddedUnit(unit, position);
 			}
 		}
