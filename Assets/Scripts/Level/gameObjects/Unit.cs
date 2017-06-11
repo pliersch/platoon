@@ -1,4 +1,5 @@
-﻿using level.battlefield;
+﻿using System;
+using level.battlefield;
 using Tanks;
 using UnityEngine;
 
@@ -12,7 +13,9 @@ namespace level.gameObjects {
 		protected TankActionHandler _actionHandler;
 		private readonly Army _army;
 		public int ActionPoints { get; set; }
+		public int Health { get; set; }
 		protected int _remainingActionPoints;
+		internal int Damage;
 
 		public Army Army {
 			get { return _army; }
@@ -69,6 +72,12 @@ namespace level.gameObjects {
 			Vector3 offset = target - _go.transform.position;
 			float distance = Mathf.Sqrt(offset.x * offset.x + offset.z * offset.z);
 			shooting.Shoot(distance);
+		}
+
+		internal void DecreaseHealth(int damage) {
+			Health -= damage;
+			TankHealth health = _go.GetComponent<TankHealth>();
+			health.TakeDamage(damage);
 		}
 
 		public void Highlight() {

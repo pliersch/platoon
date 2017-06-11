@@ -38,7 +38,7 @@ namespace level.battlefield {
 				_possibleTargets = FindPossibleTargets(unit);
 				//	_defenderArmy.UnHighlightUnits(_possibleTargets);
 				//	_defenderArmy.HighlightUnits(_possibleTargets);
-			} else if (_offenerArmy.GetActiveUnit() != null && _possibleTargets.Contains(unit)) {
+			} else if (_offenerArmy.GetActiveUnit() != null && _offenerArmy.GetActiveUnit().GetRemainingActionPoints() > 0 && _possibleTargets.Contains(unit)) {
 				Attack(unit);
 			}
 		}
@@ -52,6 +52,7 @@ namespace level.battlefield {
 			//_offenerArmy.Attack(defender);
 			Unit offener = _offenerArmy.GetActiveUnit();
 			offener.Fire(defender.RealPosition);
+			defender.DecreaseHealth(offener.Damage);
 			ShowReachableFields(offener);
 		}
 
