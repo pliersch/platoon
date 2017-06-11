@@ -7,7 +7,7 @@ namespace level.battlefield.util {
 
 	public class Raycaster {
 
-		public List<Unit> FindPossibleTargets(Unit offener, Unit[] enemies) {
+		public List<Unit> FindPossibleTargets(Unit offener, List<Unit> enemies) {
 		List<Unit> list = new List<Unit>();
 			foreach (Unit enemy in enemies) {
 				bool isWall = false;
