@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using level.battlefield.util;
 using level.gameObjects;
 using UnityEngine;
@@ -41,6 +42,10 @@ namespace level.battlefield {
 			} else if (CanAttack(unit)) {
 				Attack(unit);
 			}
+		}
+
+		internal void HandleDeath(Unit unit) {
+			_model.UpdateFreeField(_model.GetField(unit.Position), true);
 		}
 
 		public void HandleUnitMovementComplete(Unit unit) {

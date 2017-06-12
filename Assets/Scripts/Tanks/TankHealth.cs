@@ -14,7 +14,6 @@ namespace Tanks {
 		private AudioSource m_ExplosionAudio;               // The audio source to play when the tank explodes.
 		private ParticleSystem m_ExplosionParticles;        // The particle system the will play when the tank is destroyed.
 		private float m_CurrentHealth;                      // How much health the tank currently has.
-		private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
 
 		private void Awake() {
 			// Instantiate the explosion prefab and get a reference to the particle system on it.
@@ -30,7 +29,6 @@ namespace Tanks {
 		private void OnEnable() {
 			// When the tank is enabled, reset the tank's health and whether or not it's dead.
 			m_CurrentHealth = m_StartingHealth;
-			m_Dead = false;
 
 			// Update the health slider's value and color.
 			SetHealthUI();
@@ -42,11 +40,6 @@ namespace Tanks {
 
 			// Change the UI elements appropriately.
 			SetHealthUI();
-
-			// If the current health is at or below zero and it has not yet been registered, call OnDeath.
-			if (m_CurrentHealth <= 0 && !m_Dead) {
-				OnDeath();
-			}
 		}
 
 		private void SetHealthUI() {
@@ -58,10 +51,7 @@ namespace Tanks {
 		}
 
 
-		private void OnDeath() {
-			// Set the flag so that this function is only called once.
-			m_Dead = true;
-
+		public void OnDeath() {
 			// Move the instantiated explosion prefab to the tank's position and turn it on.
 			m_ExplosionParticles.transform.position = transform.position;
 			m_ExplosionParticles.gameObject.SetActive(true);

@@ -76,8 +76,11 @@ namespace level.gameObjects {
 
 		internal void DecreaseHealth(int damage) {
 			Health -= damage;
-			TankHealth health = _go.GetComponent<TankHealth>();
-			health.TakeDamage(damage);
+			if(Health <= 0) {
+				_army.HandleDeath(this);
+				_go.GetComponent<TankHealth>().OnDeath();
+			}
+			_go.GetComponent<TankHealth>().TakeDamage(damage);
 		}
 
 		public void Highlight() {
