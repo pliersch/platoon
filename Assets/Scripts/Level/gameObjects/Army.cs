@@ -1,5 +1,6 @@
 ﻿using level.battlefield;
 using System.Collections.Generic;
+using System;
 
 namespace level.gameObjects {
 
@@ -53,6 +54,10 @@ namespace level.gameObjects {
 			}
 		}
 
+		internal void HandleDeath(Unit unit) {
+			_units.Remove(unit);
+			_battlefield.HandleDeath(unit);
+		}
 	}
 
 }

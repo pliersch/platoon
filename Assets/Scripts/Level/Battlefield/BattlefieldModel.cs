@@ -85,6 +85,10 @@ namespace level.battlefield {
 			return endToStart.ToArray();
 		}
 
+		public void UpdateFreeField(Field field, bool isFree) {
+			field.IsFree = isFree;
+		}
+
 		public void UpdateFreeFields(Field[] way) {
 			way[0].IsFree = true;
 			way[way.Length - 1].IsFree = false;
